@@ -33,6 +33,10 @@ class Student
       self.new_from_db(row)
     end.first
   end
+  
+   def self.all
+    @@all = DB[:conn].execute("SELECT * FROM students").map {|row| new_from_db(row)}
+  end
 
   def self.count_all_students_in_grade_9
     sql = <<-SQL
